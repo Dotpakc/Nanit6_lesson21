@@ -14,7 +14,7 @@ Button btn(BUTTON_PIN);
 
 
 bool dirOpenDoor = false; // false - відкрити, true - закрити
-
+bool stateMotor = false; // false - STOP, true - RUN
 
 void setup() {
   Serial.begin(9600);
@@ -35,6 +35,7 @@ void loop() {
   if(btn.hold()) {
     Serial.println("Button hold");
     tone(BUZZER_PIN, 300);
+    stateMotor = true;
   }
 
   if(btn.hasClicks(2)){
@@ -47,6 +48,9 @@ void loop() {
   if (btn.release()) {
     Serial.println("Button released");
     tone(BUZZER_PIN, 360, 100);
+    stateMotor = false;
   }
+
+
 
 }
