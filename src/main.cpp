@@ -28,6 +28,7 @@ void setup() {
 
   stepper.setSpeed(100);
 
+  stepper.step(200);
   play_sound(loading_sound, 6);
 
 
@@ -62,11 +63,12 @@ void loop() {
   }
 
   if (stateMotor) {
-    if(steps >= stepsMax || steps <= stepsMin) {
+    if((steps > stepsMax && !dirOpenDoor) || ((steps < stepsMin) && dirOpenDoor)) {
       stateMotor = false;
       return;
     }
     stepper.step(dirOpenDoor ? -1 : 1);
+    steps += dirOpenDoor ? -1 : 1;
   }
 
 }
