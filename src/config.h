@@ -1,3 +1,10 @@
 
 #define BUTTON_PIN P4_1
 #define BUZZER_PIN P4_2
+
+#define MOTOR_PIN_1 P5_1
+#define MOTOR_PIN_2 P5_2
+#define MOTOR_PIN_3 P5_3
+#define MOTOR_PIN_4 P5_4
+
+#define STEPS_PER_REVOLUTION 200
