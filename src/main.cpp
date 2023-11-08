@@ -55,6 +55,28 @@ void loop() {
     dirOpenDoor = !dirOpenDoor;
   }
 
+  if(btn.hasClicks(3)){
+    stateMotor = true;
+    while(1){
+      btn.tick();
+
+      if (btn.press()) {
+        Serial.println("Button pressed");
+        return;
+      }
+
+      if (stateMotor) {
+        if((steps > stepsMax && !dirOpenDoor) || ((steps < stepsMin) && dirOpenDoor)) {
+          stateMotor = false;
+          dirOpenDoor = !dirOpenDoor;
+          return;
+        }
+        stepper.step(dirOpenDoor ? -1 : 1);
+        steps += dirOpenDoor ? -1 : 1;
+      }
+    }
+  }
+
 
   if (btn.release()) {
     Serial.println("Button released");
@@ -65,6 +87,7 @@ void loop() {
   if (stateMotor) {
     if((steps > stepsMax && !dirOpenDoor) || ((steps < stepsMin) && dirOpenDoor)) {
       stateMotor = false;
+      dirOpenDoor = !dirOpenDoor;
       return;
     }
     stepper.step(dirOpenDoor ? -1 : 1);
