@@ -28,6 +28,12 @@ void loop() {
     Serial.println("Button pressed");
     tone(BUZZER_PIN, 400, 200);
   }
+
+  if(btn.hold()) {
+    Serial.println("Button hold");
+    tone(BUZZER_PIN, 300);
+  }
+
   if (btn.release()) {
     Serial.println("Button released");
     tone(BUZZER_PIN, 360, 100);
